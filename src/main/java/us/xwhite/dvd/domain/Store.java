@@ -52,7 +52,7 @@ public class Store implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "store_id")
-    private Short storeId;
+    private Long storeId;
     
     @Basic(optional = false)
     @NotNull
@@ -74,11 +74,11 @@ public class Store implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "storeId")
     private Collection<Inventory> inventoryCollection;
 
-    public Short getStoreId() {
+    public Long getStoreId() {
         return storeId;
     }
 
-    public void setStoreId(Short storeId) {
+    public void setStoreId(Long storeId) {
         this.storeId = storeId;
     }
 

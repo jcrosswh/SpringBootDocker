@@ -1,4 +1,4 @@
-package us.xwhite;
+package us.xwhite.dvd;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

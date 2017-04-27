@@ -45,69 +45,72 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "film")
 public class Film implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "film")
+    private Collection<FilmCategory> filmCategoryCollection;
+
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "film_id")
     private Short filmId;
-    
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
     @Column(name = "title")
     private String title;
-    
+
     @Lob
     @Size(max = 65535)
     @Column(name = "description")
     private String description;
-    
+
     @Column(name = "release_year")
     @Temporal(TemporalType.DATE)
     private Date releaseYear;
-    
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "rental_duration")
     private short rentalDuration;
-    
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "rental_rate")
     private BigDecimal rentalRate;
-    
+
     @Column(name = "length")
     private Short length;
-    
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "replacement_cost")
     private BigDecimal replacementCost;
-    
+
     @Size(max = 5)
     @Column(name = "rating")
     private String rating;
-    
+
     @Size(max = 54)
     @Column(name = "special_features")
     private String specialFeatures;
-    
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "last_update")
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUpdate;
-    
+
     @JoinColumn(name = "language_id", referencedColumnName = "language_id")
     @ManyToOne(optional = false)
     private Language languageId;
-    
+
     @JoinColumn(name = "original_language_id", referencedColumnName = "language_id")
     @ManyToOne
     private Language originalLanguageId;
-    
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "filmId")
     private Collection<Inventory> inventoryCollection;
 
@@ -247,5 +250,14 @@ public class Film implements Serializable {
 
     public Film() {
     }
-    
+
+    @XmlTransient
+    public Collection<FilmCategory> getFilmCategoryCollection() {
+        return filmCategoryCollection;
+    }
+
+    public void setFilmCategoryCollection(Collection<FilmCategory> filmCategoryCollection) {
+        this.filmCategoryCollection = filmCategoryCollection;
+    }
+
 }

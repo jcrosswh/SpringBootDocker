@@ -12,6 +12,10 @@
     <class>us.xwhite.dvd.domain.City</class>
     <class>us.xwhite.dvd.domain.Customer</class>
     <class>us.xwhite.dvd.domain.Rental</class>
+    <class>us.xwhite.dvd.domain.Actor</class>
+    <class>us.xwhite.dvd.domain.FilmCategory</class>
+    <class>us.xwhite.dvd.domain.Category</class>
+    <class>us.xwhite.dvd.domain.InventorySummary</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sakila?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
