@@ -17,6 +17,7 @@ package us.xwhite.dvd.service;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import us.xwhite.dvd.db.InventorySummaryRepository;
 import us.xwhite.dvd.domain.InventorySummary;
 
@@ -24,6 +25,7 @@ import us.xwhite.dvd.domain.InventorySummary;
  *
  * @author Joel Crosswhite <joel.crosswhite@ix.netcom.com>
  */
+@Service
 public class InventoryService {
  
     @Autowired
