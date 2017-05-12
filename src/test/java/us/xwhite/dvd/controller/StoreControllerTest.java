@@ -15,16 +15,21 @@
  */
 package us.xwhite.dvd.controller;
 
-import java.util.ArrayList;
-import java.util.List;
 import static org.hamcrest.Matchers.hasSize;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -32,12 +37,12 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
 import us.xwhite.dvd.domain.InventorySummary;
+import us.xwhite.dvd.domain.StoreSummary;
 import us.xwhite.dvd.service.InventoryService;
+import us.xwhite.dvd.service.StoreService;
 
 /**
  *
@@ -56,8 +61,31 @@ public class StoreControllerTest {
     @Before
     public void setUp() {
         controller.setInventoryService(mock(InventoryService.class));
+        controller.setStoreService(mock(StoreService.class));
 
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+    }
+
+    @Test
+    public void getAllStores() throws Exception {
+
+        List<StoreSummary> expectedResult = new ArrayList<>();
+        StoreSummary store1 = new StoreSummary();
+        store1.setStoreId(1L);
+        store1.setAddress("123 Main St");
+        store1.setCity("Denver");
+        store1.setDistrict("Colorado");
+        store1.setCountry("USA");
+        expectedResult.add(store1);
+
+        when(controller.getStoreService().getAllStoreSummary()).thenReturn(expectedResult);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/stores").accept(MediaType.APPLICATION_JSON))
+                // .andDo(print())
+                .andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("$", hasSize(1)));
+
+        verify(controller.getStoreService(), atLeast(1)).getAllStoreSummary();
     }
 
     @Test

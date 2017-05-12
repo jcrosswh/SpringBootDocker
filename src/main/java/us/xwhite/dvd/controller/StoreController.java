@@ -16,13 +16,17 @@
 package us.xwhite.dvd.controller;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
 import us.xwhite.dvd.domain.InventorySummary;
+import us.xwhite.dvd.domain.StoreSummary;
 import us.xwhite.dvd.service.InventoryService;
+import us.xwhite.dvd.service.StoreService;
 
 /**
  *
@@ -35,8 +39,16 @@ public class StoreController {
     @Autowired
     InventoryService inventoryService;
 
+    @Autowired
+    StoreService storeService;
+
+    @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
+    public List<StoreSummary> getAllStores() {
+        return storeService.getAllStoreSummary();
+    }
+
     @RequestMapping(value = "/{id}/inventory", method = RequestMethod.GET)
-    public List<InventorySummary> getAllArticles(@PathVariable("id") Long storeId) {
+    public List<InventorySummary> getAllStoresInventory(@PathVariable("id") Long storeId) {
         return inventoryService.getInStockInventory(storeId);
     }
 
@@ -47,4 +59,13 @@ public class StoreController {
     public void setInventoryService(InventoryService inventoryService) {
         this.inventoryService = inventoryService;
     }
+
+    public StoreService getStoreService() {
+        return storeService;
+    }
+
+    public void setStoreService(StoreService storeService) {
+        this.storeService = storeService;
+    }
+
 }
