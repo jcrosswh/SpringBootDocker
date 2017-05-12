@@ -47,7 +47,7 @@ import us.xwhite.dvd.service.InventoryService;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @ActiveProfiles("test")
 public class StoreControllerTest {
-    
+
     @Autowired
     StoreController controller;
 
