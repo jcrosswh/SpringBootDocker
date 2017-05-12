@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package us.xwhite.dvd.domain;
+package us.xwhite.dvd.domain.base;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -25,32 +25,35 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author Joel Crosswhite <joel.crosswhite@ix.netcom.com>
  */
 @Entity
-@Table(name = "inventory")
-public class Inventory implements Serializable {
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "inventoryId")
-    private Collection<Rental> rentalCollection;
+@Table(name = "language")
+public class Language implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "inventory_id")
-    private Integer inventoryId;
+    @Column(name = "language_id")
+    private Short languageId;
+    
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 20)
+    @Column(name = "name")
+    private String name;
     
     @Basic(optional = false)
     @NotNull
@@ -58,20 +61,26 @@ public class Inventory implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUpdate;
     
-    @JoinColumn(name = "film_id", referencedColumnName = "film_id")
-    @ManyToOne(optional = false)
-    private Film filmId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "languageId")
+    private Collection<Film> filmCollection;
     
-    @JoinColumn(name = "store_id", referencedColumnName = "store_id")
-    @ManyToOne(optional = false)
-    private Store storeId;
+    @OneToMany(mappedBy = "originalLanguageId")
+    private Collection<Film> filmCollection1;
 
-    public Integer getInventoryId() {
-        return inventoryId;
+    public Short getLanguageId() {
+        return languageId;
     }
 
-    public void setInventoryId(Integer inventoryId) {
-        this.inventoryId = inventoryId;
+    public void setLanguageId(Short languageId) {
+        this.languageId = languageId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Date getLastUpdate() {
@@ -82,52 +91,46 @@ public class Inventory implements Serializable {
         this.lastUpdate = lastUpdate;
     }
 
-    public Film getFilmId() {
-        return filmId;
+    @XmlTransient
+    public Collection<Film> getFilmCollection() {
+        return filmCollection;
     }
 
-    public void setFilmId(Film filmId) {
-        this.filmId = filmId;
+    public void setFilmCollection(Collection<Film> filmCollection) {
+        this.filmCollection = filmCollection;
     }
 
-    public Store getStoreId() {
-        return storeId;
+    @XmlTransient
+    public Collection<Film> getFilmCollection1() {
+        return filmCollection1;
     }
 
-    public void setStoreId(Store storeId) {
-        this.storeId = storeId;
+    public void setFilmCollection1(Collection<Film> filmCollection1) {
+        this.filmCollection1 = filmCollection1;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (inventoryId != null ? inventoryId.hashCode() : 0);
+        hash += (languageId != null ? languageId.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
-        if (!(object instanceof Inventory)) {
+        if (!(object instanceof Language)) {
             return false;
         }
-        Inventory other = (Inventory) object;
-        return !((this.inventoryId == null && other.inventoryId != null) || (this.inventoryId != null && !this.inventoryId.equals(other.inventoryId)));
+        Language other = (Language) object;
+        return !((this.languageId == null && other.languageId != null) || (this.languageId != null && !this.languageId.equals(other.languageId)));
     }
 
     @Override
     public String toString() {
-        return "us.xwhite.dvd.domain.Inventory[ inventoryId=" + inventoryId + " ]";
+        return "us.xwhite.dvd.domain.Language[ languageId=" + languageId + " ]";
     }
 
-    public Inventory() {
+    public Language() {
     }
-
-    public Collection<Rental> getRentalCollection() {
-        return rentalCollection;
-    }
-
-    public void setRentalCollection(Collection<Rental> rentalCollection) {
-        this.rentalCollection = rentalCollection;
-    }
-
+    
 }

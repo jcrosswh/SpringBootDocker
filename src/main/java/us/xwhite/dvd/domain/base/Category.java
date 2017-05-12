@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package us.xwhite.dvd.domain;
+package us.xwhite.dvd.domain.base;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -38,41 +38,38 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Joel Crosswhite <joel.crosswhite@ix.netcom.com>
  */
 @Entity
-@Table(name = "language")
-public class Language implements Serializable {
+@Table(name = "category")
+public class Category implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "language_id")
-    private Short languageId;
-    
+    @Column(name = "category_id")
+    private Short categoryId;
+
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 20)
+    @Size(min = 1, max = 25)
     @Column(name = "name")
     private String name;
-    
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "last_update")
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUpdate;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "languageId")
-    private Collection<Film> filmCollection;
-    
-    @OneToMany(mappedBy = "originalLanguageId")
-    private Collection<Film> filmCollection1;
 
-    public Short getLanguageId() {
-        return languageId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
+    private Collection<FilmCategory> filmCategoryCollection;
+
+    public Short getCategoryId() {
+        return categoryId;
     }
 
-    public void setLanguageId(Short languageId) {
-        this.languageId = languageId;
+    public void setCategoryId(Short categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getName() {
@@ -92,45 +89,33 @@ public class Language implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Film> getFilmCollection() {
-        return filmCollection;
+    public Collection<FilmCategory> getFilmCategoryCollection() {
+        return filmCategoryCollection;
     }
 
-    public void setFilmCollection(Collection<Film> filmCollection) {
-        this.filmCollection = filmCollection;
-    }
-
-    @XmlTransient
-    public Collection<Film> getFilmCollection1() {
-        return filmCollection1;
-    }
-
-    public void setFilmCollection1(Collection<Film> filmCollection1) {
-        this.filmCollection1 = filmCollection1;
+    public void setFilmCategoryCollection(Collection<FilmCategory> filmCategoryCollection) {
+        this.filmCategoryCollection = filmCategoryCollection;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (languageId != null ? languageId.hashCode() : 0);
+        hash += (categoryId != null ? categoryId.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
-        if (!(object instanceof Language)) {
+        if (!(object instanceof Category)) {
             return false;
         }
-        Language other = (Language) object;
-        return !((this.languageId == null && other.languageId != null) || (this.languageId != null && !this.languageId.equals(other.languageId)));
+        Category other = (Category) object;
+        return !((this.categoryId == null && other.categoryId != null) || (this.categoryId != null && !this.categoryId.equals(other.categoryId)));
     }
 
     @Override
     public String toString() {
-        return "us.xwhite.dvd.domain.Language[ languageId=" + languageId + " ]";
+        return "us.xwhite.dvd.domain.Category[ categoryId=" + categoryId + " ]";
     }
 
-    public Language() {
-    }
-    
 }

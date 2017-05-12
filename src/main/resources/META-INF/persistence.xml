@@ -2,20 +2,20 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="us.xwhite_dvd_jar_0.0.1-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>us.xwhite.dvd.domain.Language</class>
-    <class>us.xwhite.dvd.domain.Inventory</class>
-    <class>us.xwhite.dvd.domain.Store</class>
-    <class>us.xwhite.dvd.domain.Country</class>
-    <class>us.xwhite.dvd.domain.Film</class>
-    <class>us.xwhite.dvd.domain.Address</class>
-    <class>us.xwhite.dvd.domain.Staff</class>
-    <class>us.xwhite.dvd.domain.City</class>
-    <class>us.xwhite.dvd.domain.Customer</class>
-    <class>us.xwhite.dvd.domain.Rental</class>
     <class>us.xwhite.dvd.domain.Actor</class>
-    <class>us.xwhite.dvd.domain.FilmCategory</class>
-    <class>us.xwhite.dvd.domain.Category</class>
     <class>us.xwhite.dvd.domain.InventorySummary</class>
+    <class>us.xwhite.dvd.domain.base.Address</class>
+    <class>us.xwhite.dvd.domain.base.Store</class>
+    <class>us.xwhite.dvd.domain.base.Category</class>
+    <class>us.xwhite.dvd.domain.base.Language</class>
+    <class>us.xwhite.dvd.domain.base.Inventory</class>
+    <class>us.xwhite.dvd.domain.base.Country</class>
+    <class>us.xwhite.dvd.domain.base.FilmCategory</class>
+    <class>us.xwhite.dvd.domain.base.City</class>
+    <class>us.xwhite.dvd.domain.base.Rental</class>
+    <class>us.xwhite.dvd.domain.base.Staff</class>
+    <class>us.xwhite.dvd.domain.base.Film</class>
+    <class>us.xwhite.dvd.domain.base.Customer</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sakila?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

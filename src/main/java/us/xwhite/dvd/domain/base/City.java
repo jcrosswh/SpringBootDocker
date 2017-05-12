@@ -13,11 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package us.xwhite.dvd.domain;
+package us.xwhite.dvd.domain.base;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,36 +27,35 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author Joel Crosswhite <joel.crosswhite@ix.netcom.com>
  */
 @Entity
-@Table(name = "rental")
-public class Rental implements Serializable {
+@Table(name = "city")
+public class City implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "rental_id")
-    private Integer rentalId;
+    @Column(name = "city_id")
+    private Short cityId;
     
     @Basic(optional = false)
     @NotNull
-    @Column(name = "rental_date")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date rentalDate;
-    
-    @Column(name = "return_date")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date returnDate;
+    @Size(min = 1, max = 50)
+    @Column(name = "city")
+    private String city;
     
     @Basic(optional = false)
     @NotNull
@@ -62,40 +63,27 @@ public class Rental implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUpdate;
     
-    @JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
-    @ManyToOne(optional = false)
-    private Customer customerId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cityId")
+    private Collection<Address> addressCollection;
     
-    @JoinColumn(name = "inventory_id", referencedColumnName = "inventory_id")
+    @JoinColumn(name = "country_id", referencedColumnName = "country_id")
     @ManyToOne(optional = false)
-    private Inventory inventoryId;
-    
-    @JoinColumn(name = "staff_id", referencedColumnName = "staff_id")
-    @ManyToOne(optional = false)
-    private Staff staffId;
+    private Country countryId;
 
-    public Integer getRentalId() {
-        return rentalId;
+    public Short getCityId() {
+        return cityId;
     }
 
-    public void setRentalId(Integer rentalId) {
-        this.rentalId = rentalId;
+    public void setCityId(Short cityId) {
+        this.cityId = cityId;
     }
 
-    public Date getRentalDate() {
-        return rentalDate;
+    public String getCity() {
+        return city;
     }
 
-    public void setRentalDate(Date rentalDate) {
-        this.rentalDate = rentalDate;
-    }
-
-    public Date getReturnDate() {
-        return returnDate;
-    }
-
-    public void setReturnDate(Date returnDate) {
-        this.returnDate = returnDate;
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public Date getLastUpdate() {
@@ -106,49 +94,45 @@ public class Rental implements Serializable {
         this.lastUpdate = lastUpdate;
     }
 
-    public Customer getCustomerId() {
-        return customerId;
+    @XmlTransient
+    public Collection<Address> getAddressCollection() {
+        return addressCollection;
     }
 
-    public void setCustomerId(Customer customerId) {
-        this.customerId = customerId;
+    public void setAddressCollection(Collection<Address> addressCollection) {
+        this.addressCollection = addressCollection;
     }
 
-    public Inventory getInventoryId() {
-        return inventoryId;
+    public Country getCountryId() {
+        return countryId;
     }
 
-    public void setInventoryId(Inventory inventoryId) {
-        this.inventoryId = inventoryId;
-    }
-
-    public Staff getStaffId() {
-        return staffId;
-    }
-
-    public void setStaffId(Staff staffId) {
-        this.staffId = staffId;
+    public void setCountryId(Country countryId) {
+        this.countryId = countryId;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (rentalId != null ? rentalId.hashCode() : 0);
+        hash += (cityId != null ? cityId.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
-        if (!(object instanceof Rental)) {
+        if (!(object instanceof City)) {
             return false;
         }
-        Rental other = (Rental) object;
-        return !((this.rentalId == null && other.rentalId != null) || (this.rentalId != null && !this.rentalId.equals(other.rentalId)));
+        City other = (City) object;
+        return !((this.cityId == null && other.cityId != null) || (this.cityId != null && !this.cityId.equals(other.cityId)));
     }
 
     @Override
     public String toString() {
-        return "us.xwhite.dvd.domain.Rental[ rentalId=" + rentalId + " ]";
+        return "us.xwhite.dvd.domain.City[ cityId=" + cityId + " ]";
+    }
+
+    public City() {
     }
     
 }
