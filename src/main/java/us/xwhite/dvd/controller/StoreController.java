@@ -49,6 +49,7 @@ public class StoreController {
         return storeService.getAllStoreSummary();
     }
 
+    @CrossOrigin
     @RequestMapping(value = "/{id}/inventory", method = RequestMethod.GET)
     public List<InventorySummary> getAllStoresInventory(@PathVariable("id") Long storeId) {
         return inventoryService.getInStockInventory(storeId);
