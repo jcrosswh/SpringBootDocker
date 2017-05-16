@@ -28,7 +28,9 @@ import javax.validation.constraints.NotNull;
 @Embeddable
 public class FilmCategoryPK implements Serializable {
 
-    @Basic(optional = false)
+    private static final long serialVersionUID = 1L;
+
+	@Basic(optional = false)
     @NotNull
     @Column(name = "film_id")
     private short filmId;
