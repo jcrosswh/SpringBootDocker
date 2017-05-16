@@ -17,6 +17,8 @@ package us.xwhite.dvd.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,6 +38,9 @@ import us.xwhite.dvd.service.StoreService;
 @RestController
 @RequestMapping("/api/stores")
 public class StoreController {
+	
+	private static final Logger logger = LoggerFactory
+			.getLogger(StoreController.class);
 
     @Autowired
     InventoryService inventoryService;
@@ -46,12 +51,15 @@ public class StoreController {
     @CrossOrigin
     @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
     public List<StoreSummary> getAllStores() {
+    	logger.debug("In getAllStores...");
         return storeService.getAllStoreSummary();
     }
 
     @CrossOrigin
     @RequestMapping(value = "/{id}/inventory", method = RequestMethod.GET)
     public List<InventorySummary> getAllStoresInventory(@PathVariable("id") Long storeId) {
+    	logger.debug("In getAllStoresInventory...");
+    	logger.debug("id:={}", storeId);
         return inventoryService.getInStockInventory(storeId);
     }
 

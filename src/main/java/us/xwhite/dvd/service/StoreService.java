@@ -17,9 +17,12 @@ package us.xwhite.dvd.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import us.xwhite.dvd.controller.StoreController;
 import us.xwhite.dvd.db.StoreSummaryRepository;
 import us.xwhite.dvd.domain.StoreSummary;
 
@@ -29,11 +32,15 @@ import us.xwhite.dvd.domain.StoreSummary;
  */
 @Service
 public class StoreService {
+	
+	private static final Logger logger = LoggerFactory
+			.getLogger(StoreController.class);
 
     @Autowired
     private StoreSummaryRepository storeSummaryRepository;
 
     public List<StoreSummary> getAllStoreSummary() {
+    	logger.debug("In getAllStoreSummary...");
         return storeSummaryRepository.findAll();
     }
 }
