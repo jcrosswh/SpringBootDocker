@@ -24,3 +24,4 @@ nbdist/
 .nb-gradle/
 /nb-configuration.xml
 /nbactions.xml
+/env.file
