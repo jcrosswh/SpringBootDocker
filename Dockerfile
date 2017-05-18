@@ -1,4 +1,4 @@
-FROM openjdk:8
+FROM openjdk:8-jre-alpine
 VOLUME /tmp
 ADD target/app.jar app.jar
 EXPOSE 8080
