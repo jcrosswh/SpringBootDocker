@@ -38,9 +38,9 @@ import us.xwhite.dvd.service.StoreService;
 @RestController
 @RequestMapping("/api/stores")
 public class StoreController {
-	
-	private static final Logger logger = LoggerFactory
-			.getLogger(StoreController.class);
+
+    private static final Logger logger = LoggerFactory
+            .getLogger(StoreController.class);
 
     @Autowired
     InventoryService inventoryService;
@@ -51,15 +51,15 @@ public class StoreController {
     @CrossOrigin
     @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
     public List<StoreSummary> getAllStores() {
-    	logger.debug("In getAllStores...");
+        logger.debug("In getAllStores...");
         return storeService.getAllStoreSummary();
     }
 
     @CrossOrigin
     @RequestMapping(value = "/{id}/inventory", method = RequestMethod.GET)
     public List<InventorySummary> getAllStoresInventory(@PathVariable("id") Long storeId) {
-    	logger.debug("In getAllStoresInventory...");
-    	logger.debug("id:={}", storeId);
+        logger.debug("In getAllStoresInventory...");
+        logger.debug("id:={}", storeId);
         return inventoryService.getInStockInventory(storeId);
     }
 
