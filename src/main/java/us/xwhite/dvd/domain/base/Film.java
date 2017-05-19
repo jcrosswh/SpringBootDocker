@@ -15,6 +15,7 @@
  */
 package us.xwhite.dvd.domain.base;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
@@ -219,6 +220,7 @@ public class Film implements Serializable {
     }
 
     @XmlTransient
+    @JsonIgnore
     public Collection<Inventory> getInventoryCollection() {
         return inventoryCollection;
     }
@@ -252,6 +254,7 @@ public class Film implements Serializable {
     }
 
     @XmlTransient
+    @JsonIgnore
     public Collection<FilmCategory> getFilmCategoryCollection() {
         return filmCategoryCollection;
     }

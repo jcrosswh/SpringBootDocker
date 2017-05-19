@@ -15,6 +15,7 @@
  */
 package us.xwhite.dvd.domain.base;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
@@ -92,6 +93,7 @@ public class Language implements Serializable {
     }
 
     @XmlTransient
+    @JsonIgnore
     public Collection<Film> getFilmCollection() {
         return filmCollection;
     }
@@ -101,6 +103,7 @@ public class Language implements Serializable {
     }
 
     @XmlTransient
+    @JsonIgnore
     public Collection<Film> getFilmCollection1() {
         return filmCollection1;
     }
