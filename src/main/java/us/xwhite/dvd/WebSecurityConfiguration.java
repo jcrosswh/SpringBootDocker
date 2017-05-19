@@ -49,7 +49,7 @@ class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	    	.sessionManagement()
 	        .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
     		.authorizeRequests()
-    		.antMatchers(HttpMethod.GET, "/api/stores/**", "/api/categories/**").permitAll()
+    		.antMatchers(HttpMethod.GET, "/api/stores/**", "/api/categories/**", "/api/films/**").permitAll()
     		.anyRequest().fullyAuthenticated().and()
     		.httpBasic().and()
     		.csrf().disable();
