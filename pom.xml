@@ -133,7 +133,8 @@
                         <argument>run</argument>
                         <argument>-p</argument>
                         <argument>8080:8080</argument>
-                        <argument>-env-file</argument>
+                        <argument>-d</argument>
+                        <argument>--env-file</argument>
                         <argument>env.file</argument>
                         <argument>jcrosswh/spring-boot-docker:${project.version}</argument>
                     </arguments>
