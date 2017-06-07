@@ -1,6 +1,4 @@
-FROM openjdk:8-jre-alpine
-VOLUME /tmp
-ADD target/app.jar app.jar
+FROM openjdk:8u131-jre-alpine
+ADD app.jar app.jar
 EXPOSE 8080
-RUN sh -c 'touch /app.jar'
 ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
