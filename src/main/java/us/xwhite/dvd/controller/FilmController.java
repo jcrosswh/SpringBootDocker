@@ -47,12 +47,4 @@ public class FilmController {
         logger.debug("In getFilmDetailByTitle(title:={})", title);
         return filmRepository.findOneByName(title);
     }
-
-    public FilmRepository getFilmRepository() {
-        return filmRepository;
-    }
-
-    public void setFilmRepository(FilmRepository filmRepository) {
-        this.filmRepository = filmRepository;
-    }
 }

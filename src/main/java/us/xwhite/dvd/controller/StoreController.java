@@ -62,21 +62,4 @@ public class StoreController {
         logger.debug("id:={}", storeId);
         return inventoryService.getInStockInventory(storeId);
     }
-
-    public InventoryService getInventoryService() {
-        return inventoryService;
-    }
-
-    public void setInventoryService(InventoryService inventoryService) {
-        this.inventoryService = inventoryService;
-    }
-
-    public StoreService getStoreService() {
-        return storeService;
-    }
-
-    public void setStoreService(StoreService storeService) {
-        this.storeService = storeService;
-    }
-
 }

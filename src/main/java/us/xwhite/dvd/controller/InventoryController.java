@@ -40,12 +40,4 @@ public class InventoryController {
             @RequestParam(value = "store", required = true) Long storeId) {
         return inventoryService.getInStockInventory(storeId);
     }
-
-    public InventoryService getInventoryService() {
-        return inventoryService;
-    }
-
-    public void setInventoryService(InventoryService inventoryService) {
-        this.inventoryService = inventoryService;
-    }
 }

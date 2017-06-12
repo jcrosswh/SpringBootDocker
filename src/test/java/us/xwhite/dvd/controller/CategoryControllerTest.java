@@ -18,47 +18,40 @@ package us.xwhite.dvd.controller;
 import java.util.ArrayList;
 import java.util.List;
 import static org.hamcrest.Matchers.hasSize;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.atLeast;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import us.xwhite.dvd.db.CategoryRepository;
-import us.xwhite.dvd.domain.StoreSummary;
 
 /**
  *
  * @author Joel Crosswhite <joel.crosswhite@ix.netcom.com>
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
-@ActiveProfiles("test")
+@SpringBootTest
+@AutoConfigureMockMvc
 public class CategoryControllerTest {
 
     @Autowired
-    CategoryController controller;
-
     MockMvc mockMvc;
 
-    @Before
-    public void setUp() {
-        controller.setCategoryRepository(mock(CategoryRepository.class));
-
-        mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
-    }
+    @MockBean
+    private CategoryRepository categoryRepository;
 
     @Test
     public void getAllCategories() throws Exception {
@@ -67,13 +60,15 @@ public class CategoryControllerTest {
         expectedResult.add("Action");
         expectedResult.add("Horror");
 
-        when(controller.getCategoryRepository().findAllNames()).thenReturn(expectedResult);
+        given(categoryRepository.findAllNames())
+                .willReturn(expectedResult);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/categories").accept(MediaType.APPLICATION_JSON))
                 // .andDo(print())
                 .andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(header().string(HttpHeaders.ETAG, "\"0eeff5d7857cec1382b9ce5d2ad57320e\""))
                 .andExpect(jsonPath("$", hasSize(2)));
 
-        verify(controller.getCategoryRepository(), atLeast(1)).findAllNames();
+        verify(categoryRepository, atLeast(1)).findAllNames();
     }
 }

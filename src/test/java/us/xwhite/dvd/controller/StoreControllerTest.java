@@ -17,9 +17,7 @@ package us.xwhite.dvd.controller;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.Mockito.atLeast;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -27,18 +25,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import static org.mockito.BDDMockito.given;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import us.xwhite.dvd.domain.InventorySummary;
 import us.xwhite.dvd.domain.StoreSummary;
 import us.xwhite.dvd.service.InventoryService;
@@ -49,22 +48,18 @@ import us.xwhite.dvd.service.StoreService;
  * @author Joel Crosswhite <joel.crosswhite@ix.netcom.com>
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
-@ActiveProfiles("test")
+@SpringBootTest
+@AutoConfigureMockMvc
 public class StoreControllerTest {
 
     @Autowired
-    StoreController controller;
-
     MockMvc mockMvc;
 
-    @Before
-    public void setUp() {
-        controller.setInventoryService(mock(InventoryService.class));
-        controller.setStoreService(mock(StoreService.class));
+    @MockBean
+    private InventoryService inventoryService;
 
-        mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
-    }
+    @MockBean
+    private StoreService storeService;
 
     @Test
     public void getAllStores() throws Exception {
@@ -78,14 +73,16 @@ public class StoreControllerTest {
         store1.setCountry("USA");
         expectedResult.add(store1);
 
-        when(controller.getStoreService().getAllStoreSummary()).thenReturn(expectedResult);
+        given(storeService.getAllStoreSummary())
+                .willReturn(expectedResult);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/stores").accept(MediaType.APPLICATION_JSON))
                 // .andDo(print())
                 .andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(header().string(HttpHeaders.ETAG, "\"0b8112a05406407b3d2b9ab377e1c8e01\""))
                 .andExpect(jsonPath("$", hasSize(1)));
 
-        verify(controller.getStoreService(), atLeast(1)).getAllStoreSummary();
+        verify(storeService, atLeast(1)).getAllStoreSummary();
     }
 
     @Test
@@ -95,13 +92,15 @@ public class StoreControllerTest {
         InventorySummary inventory1 = new InventorySummary("ALL THE ROSES", "Drama", 4L);
         expectedResult.add(inventory1);
 
-        when(controller.getInventoryService().getInStockInventory(1L)).thenReturn(expectedResult);
+        given(inventoryService.getInStockInventory(1L))
+                .willReturn(expectedResult);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/stores/1/inventory").accept(MediaType.APPLICATION_JSON))
                 // .andDo(print())
                 .andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(header().string(HttpHeaders.ETAG, "\"029748d1cb4df1af20eb0ae62f85d91b1\""))
                 .andExpect(jsonPath("$", hasSize(1)));
 
-        verify(controller.getInventoryService(), atLeast(1)).getInStockInventory(1L);
+        verify(inventoryService, atLeast(1)).getInStockInventory(1L);
     }
 }

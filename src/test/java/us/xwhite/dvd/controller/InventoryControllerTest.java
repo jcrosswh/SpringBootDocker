@@ -18,24 +18,24 @@ package us.xwhite.dvd.controller;
 import java.util.ArrayList;
 import java.util.List;
 import static org.hamcrest.Matchers.hasSize;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.atLeast;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import us.xwhite.dvd.domain.InventorySummary;
 import us.xwhite.dvd.service.InventoryService;
 
@@ -44,21 +44,15 @@ import us.xwhite.dvd.service.InventoryService;
  * @author Joel Crosswhite <joel.crosswhite@ix.netcom.com>
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
-@ActiveProfiles("test")
+@SpringBootTest
+@AutoConfigureMockMvc
 public class InventoryControllerTest {
 
     @Autowired
-    InventoryController controller;
-
     MockMvc mockMvc;
 
-    @Before
-    public void setUp() {
-        controller.setInventoryService(mock(InventoryService.class));
-
-        mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
-    }
+    @MockBean
+    private InventoryService inventoryService;
 
     @Test
     public void getAllInStockVideos() throws Exception {
@@ -67,13 +61,15 @@ public class InventoryControllerTest {
         InventorySummary inventory1 = new InventorySummary("ALL THE ROSES", "Drama", 4L);
         expectedResult.add(inventory1);
 
-        when(controller.getInventoryService().getInStockInventory(1L)).thenReturn(expectedResult);
+        given(inventoryService.getInStockInventory(1L))
+                .willReturn(expectedResult);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/inventory?store=1").accept(MediaType.APPLICATION_JSON))
                 // .andDo(print())
                 .andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(header().string(HttpHeaders.ETAG, "\"029748d1cb4df1af20eb0ae62f85d91b1\""))
                 .andExpect(jsonPath("$", hasSize(1)));
 
-        verify(controller.getInventoryService(), atLeast(1)).getInStockInventory(1L);
+        verify(inventoryService, atLeast(1)).getInStockInventory(1L);
     }
 }

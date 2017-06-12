@@ -42,17 +42,23 @@ class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers(HttpMethod.OPTIONS, "/**");
     }
-    
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-    	http
-	    	.sessionManagement()
-	        .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-    		.authorizeRequests()
-    		.antMatchers(HttpMethod.GET, "/api/stores/**", "/api/categories/**", "/api/films/**").permitAll()
-    		.anyRequest().fullyAuthenticated().and()
-    		.httpBasic().and()
-    		.csrf().disable();
+        http
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                .authorizeRequests()
+                .antMatchers(HttpMethod.GET,
+                        "/api/stores/**",
+                        "/api/categories/**",
+                        "/api/films/**",
+                        "/api/inventory/**")
+                .permitAll()
+                .anyRequest().fullyAuthenticated().and()
+                .httpBasic().and()
+                .csrf().disable()
+                .headers().cacheControl().disable();
     }
 
     // the default sakila database does not contain password or roles information
@@ -62,9 +68,9 @@ class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
-			.jdbcAuthentication()
-			.dataSource(dataSource)
-			.usersByUsernameQuery("select email, 'password', active from customer where email = ?")
-			.authoritiesByUsernameQuery("select email, 'read' from customer where email = ?");
+                .jdbcAuthentication()
+                .dataSource(dataSource)
+                .usersByUsernameQuery("select email, 'password', active from customer where email = ?")
+                .authoritiesByUsernameQuery("select email, 'read' from customer where email = ?");
     }
 }

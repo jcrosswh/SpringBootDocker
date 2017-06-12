@@ -45,12 +45,4 @@ public class CategoryController {
         logger.debug("In getAllCategories...");
         return categoryRepository.findAllNames();
     }
-
-    public CategoryRepository getCategoryRepository() {
-        return categoryRepository;
-    }
-
-    public void setCategoryRepository(CategoryRepository categoryRepository) {
-        this.categoryRepository = categoryRepository;
-    }
 }
