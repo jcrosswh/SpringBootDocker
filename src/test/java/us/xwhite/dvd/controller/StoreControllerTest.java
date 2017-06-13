@@ -15,6 +15,7 @@
  */
 package us.xwhite.dvd.controller;
 
+import java.math.BigDecimal;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.verify;
@@ -89,7 +90,7 @@ public class StoreControllerTest {
     public void getAllInStockVideos() throws Exception {
 
         List<InventorySummary> expectedResult = new ArrayList<>();
-        InventorySummary inventory1 = new InventorySummary("ALL THE ROSES", "Drama", 4L);
+        InventorySummary inventory1 = new InventorySummary("ALL THE ROSES", "Drama", 4L, new BigDecimal(2.99), "PG");
         expectedResult.add(inventory1);
 
         given(inventoryService.getInStockInventory(1L))
@@ -98,7 +99,7 @@ public class StoreControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/api/stores/1/inventory").accept(MediaType.APPLICATION_JSON))
                 // .andDo(print())
                 .andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(header().string(HttpHeaders.ETAG, "\"029748d1cb4df1af20eb0ae62f85d91b1\""))
+                .andExpect(header().string(HttpHeaders.ETAG, "\"000cecd33579b7aff2232b0ff42079fe0\""))
                 .andExpect(jsonPath("$", hasSize(1)));
 
         verify(inventoryService, atLeast(1)).getInStockInventory(1L);

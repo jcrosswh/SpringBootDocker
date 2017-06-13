@@ -27,6 +27,6 @@ import us.xwhite.dvd.domain.InventorySummary;
  */
 public interface InventorySummaryRepository extends Repository<InventorySummary, String> {
  
-    @Query("select new InventorySummary(f.title, c.name, count(*)) from Film f join f.inventoryCollection i join f.filmCategoryCollection fc join fc.category c left join i.rentalCollection r with r.returnDate is null where i.storeId.storeId = :storeId and r.inventoryId is null group by f.title, c.name")
+    @Query("select new InventorySummary(f.title, c.name, count(*), f.rentalRate, f.rating) from Film f join f.inventoryCollection i join f.filmCategoryCollection fc join fc.category c left join i.rentalCollection r with r.returnDate is null where i.storeId.storeId = :storeId and r.inventoryId is null group by f.title, c.name, f.rentalRate, f.rating")
     public List<InventorySummary> findAllInStockAtStore(@Param("storeId") Long storeId);
 }

@@ -16,6 +16,7 @@
 package us.xwhite.dvd.domain;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -34,6 +35,10 @@ public class InventorySummary implements Serializable {
     private String category;
 
     private Long count;
+
+    private BigDecimal rentalRate;
+
+    private String rating;
 
     public String getFilmTitle() {
         return filmTitle;
@@ -59,13 +64,31 @@ public class InventorySummary implements Serializable {
         this.count = count;
     }
 
+    public BigDecimal getRentalRate() {
+        return rentalRate;
+    }
+
+    public void setRentalRate(BigDecimal rentalRate) {
+        this.rentalRate = rentalRate;
+    }
+
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+
     public InventorySummary() {
     }
 
-    public InventorySummary(String filmTitle, String category, Long count) {
+    public InventorySummary(String filmTitle, String category, Long count, BigDecimal rentalRate, String rating) {
         this.filmTitle = filmTitle;
         this.category = category;
         this.count = count;
+        this.rentalRate = rentalRate;
+        this.rating = rating;
     }
 
     @Override
