@@ -48,14 +48,14 @@ public class StoreController {
     @Autowired
     StoreService storeService;
 
-    @CrossOrigin
+    @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
     public List<StoreSummary> getAllStores() {
         logger.debug("In getAllStores...");
         return storeService.getAllStoreSummary();
     }
 
-    @CrossOrigin
+    @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "/{id}/inventory", method = RequestMethod.GET)
     public List<InventorySummary> getAllStoresInventory(@PathVariable("id") Long storeId) {
         logger.debug("In getAllStoresInventory...");

@@ -39,7 +39,7 @@ public class CategoryController {
     @Autowired
     CategoryRepository categoryRepository;
 
-    @CrossOrigin
+    @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
     public List<String> getAllCategories() {
         logger.debug("In getAllCategories...");

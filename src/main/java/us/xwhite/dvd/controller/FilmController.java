@@ -35,12 +35,12 @@ import us.xwhite.dvd.domain.base.Film;
 public class FilmController {
 
     private static final Logger logger = LoggerFactory
-            .getLogger(StoreController.class);
+            .getLogger(FilmController.class);
 
     @Autowired
     FilmRepository filmRepository;
 
-    @CrossOrigin
+    @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(method = RequestMethod.GET)
     public Film getFilmDetailByTitle(
             @RequestParam(value = "title", required = true) String title) {
