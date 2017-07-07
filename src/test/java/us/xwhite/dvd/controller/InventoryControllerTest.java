@@ -59,7 +59,7 @@ public class InventoryControllerTest {
     public void getAllInStockVideos() throws Exception {
 
         List<InventorySummary> expectedResult = new ArrayList<>();
-        InventorySummary inventory1 = new InventorySummary("ALL THE ROSES", "Drama", 4L, new BigDecimal(2.99), "PG");
+        InventorySummary inventory1 = new InventorySummary("ALL THE ROSES", "Drama", 4L, new BigDecimal("2.99"), "PG");
         expectedResult.add(inventory1);
 
         given(inventoryService.getInStockInventory(1L))
@@ -68,7 +68,7 @@ public class InventoryControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/api/inventory?store=1").accept(MediaType.APPLICATION_JSON))
                 // .andDo(print())
                 .andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(header().string(HttpHeaders.ETAG, "\"000cecd33579b7aff2232b0ff42079fe0\""))
+                .andExpect(header().string(HttpHeaders.ETAG, "\"0cb850c2019ebbf9db1a4e2de8c4de71f\""))
                 .andExpect(jsonPath("$", hasSize(1)));
 
         verify(inventoryService, atLeast(1)).getInStockInventory(1L);
