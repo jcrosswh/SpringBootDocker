@@ -48,7 +48,7 @@ import us.xwhite.dvd.db.CategoryRepository;
 public class CategoryControllerTest {
 
     @Autowired
-    MockMvc mockMvc;
+    private MockMvc mockMvc;
 
     @MockBean
     private CategoryRepository categoryRepository;
