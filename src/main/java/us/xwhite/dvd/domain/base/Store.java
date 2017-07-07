@@ -145,9 +145,6 @@ public class Store implements Serializable {
         return "us.xwhite.dvd.domain.Store[ storeId=" + storeId + " ]";
     }
 
-    public Store() {
-    }
-
     public Collection<Customer> getCustomerCollection() {
         return customerCollection;
     }

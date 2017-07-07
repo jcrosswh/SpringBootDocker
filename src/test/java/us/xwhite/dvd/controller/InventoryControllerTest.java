@@ -50,7 +50,7 @@ import us.xwhite.dvd.service.InventoryService;
 public class InventoryControllerTest {
 
     @Autowired
-    MockMvc mockMvc;
+    private MockMvc mockMvc;
 
     @MockBean
     private InventoryService inventoryService;

@@ -35,7 +35,7 @@ import us.xwhite.dvd.domain.base.Film;
 public class FilmRepositoryTest {
     
     @Autowired
-    FilmRepository filmRepository;
+    private FilmRepository filmRepository;
 
     @Test
     @Transactional

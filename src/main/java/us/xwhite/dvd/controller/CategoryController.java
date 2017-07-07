@@ -37,7 +37,7 @@ public class CategoryController {
             .getLogger(CategoryController.class);
 
     @Autowired
-    CategoryRepository categoryRepository;
+    private CategoryRepository categoryRepository;
 
     @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)

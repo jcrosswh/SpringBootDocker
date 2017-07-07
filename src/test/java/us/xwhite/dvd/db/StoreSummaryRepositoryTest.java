@@ -39,7 +39,7 @@ import us.xwhite.dvd.domain.StoreSummary;
 public class StoreSummaryRepositoryTest {
 
     @Autowired
-    StoreSummaryRepository storeSummaryRepository;
+    private StoreSummaryRepository storeSummaryRepository;
 
     @Test
     @Transactional

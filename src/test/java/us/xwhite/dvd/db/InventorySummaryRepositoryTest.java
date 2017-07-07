@@ -36,7 +36,7 @@ import us.xwhite.dvd.domain.InventorySummary;
 public class InventorySummaryRepositoryTest {
     
     @Autowired
-    InventorySummaryRepository inventorySummaryRepository;
+    private InventorySummaryRepository inventorySummaryRepository;
     
     @Test
     @Transactional

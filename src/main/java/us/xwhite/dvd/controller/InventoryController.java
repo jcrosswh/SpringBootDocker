@@ -33,7 +33,7 @@ import us.xwhite.dvd.service.InventoryService;
 public class InventoryController {
 
     @Autowired
-    InventoryService inventoryService;
+    private InventoryService inventoryService;
 
     @RequestMapping(method = RequestMethod.GET)
     public List<InventorySummary> getAllArticles(

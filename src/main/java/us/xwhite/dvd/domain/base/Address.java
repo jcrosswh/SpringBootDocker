@@ -206,9 +206,6 @@ public class Address implements Serializable {
         return "us.xwhite.dvd.domain.Address[ addressId=" + addressId + " ]";
     }
 
-    public Address() {
-    }
-
     public byte[] getLocation() {
         return location;
     }

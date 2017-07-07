@@ -28,6 +28,7 @@ import us.xwhite.dvd.domain.StoreSummary;
  */
 public interface StoreSummaryRepository extends Repository<StoreSummary, String> {
 
-    @Query("select new StoreSummary(s.storeId, a.address, a.address2, a.district, a.phone, c.city, co.country) from Address a join a.storeCollection s join a.cityId c join c.countryId co")
+    @Query("select new StoreSummary(s.storeId, a.address, a.address2, a.district, a.phone, c.city, co.country) "
+            + "from Address a join a.storeCollection s join a.cityId c join c.countryId co")
     public List<StoreSummary> findAll();
 }

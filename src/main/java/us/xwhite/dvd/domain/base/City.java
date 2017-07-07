@@ -131,8 +131,5 @@ public class City implements Serializable {
     public String toString() {
         return "us.xwhite.dvd.domain.City[ cityId=" + cityId + " ]";
     }
-
-    public City() {
-    }
     
 }

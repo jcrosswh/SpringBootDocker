@@ -43,10 +43,10 @@ public class StoreController {
             .getLogger(StoreController.class);
 
     @Autowired
-    InventoryService inventoryService;
+    private InventoryService inventoryService;
 
     @Autowired
-    StoreService storeService;
+    private StoreService storeService;
 
     @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)

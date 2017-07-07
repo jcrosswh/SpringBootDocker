@@ -35,7 +35,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class CategoryRepositoryTest {
     
     @Autowired
-    CategoryRepository categoryRepository;
+    private CategoryRepository categoryRepository;
 
     @Test
     @Transactional

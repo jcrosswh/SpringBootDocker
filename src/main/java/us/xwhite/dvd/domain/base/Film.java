@@ -250,9 +250,6 @@ public class Film implements Serializable {
         return "us.xwhite.dvd.domain.Film[ filmId=" + filmId + " ]";
     }
 
-    public Film() {
-    }
-
     @XmlTransient
     @JsonIgnore
     public Collection<FilmCategory> getFilmCategoryCollection() {

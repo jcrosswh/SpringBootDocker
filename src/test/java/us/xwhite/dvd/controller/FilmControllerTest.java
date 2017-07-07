@@ -45,7 +45,7 @@ import us.xwhite.dvd.domain.base.Film;
 public class FilmControllerTest {
 
     @Autowired
-    MockMvc mockMvc;
+    private MockMvc mockMvc;
 
     @MockBean
     private FilmRepository filmRepository;

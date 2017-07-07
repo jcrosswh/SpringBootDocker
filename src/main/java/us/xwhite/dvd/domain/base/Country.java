@@ -118,7 +118,4 @@ public class Country implements Serializable {
         return "us.xwhite.dvd.domain.Country[ countryId=" + countryId + " ]";
     }
 
-    public Country() {
-    }
-
 }

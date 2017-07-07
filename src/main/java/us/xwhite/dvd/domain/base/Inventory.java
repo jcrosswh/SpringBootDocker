@@ -119,9 +119,6 @@ public class Inventory implements Serializable {
         return "us.xwhite.dvd.domain.Inventory[ inventoryId=" + inventoryId + " ]";
     }
 
-    public Inventory() {
-    }
-
     public Collection<Rental> getRentalCollection() {
         return rentalCollection;
     }

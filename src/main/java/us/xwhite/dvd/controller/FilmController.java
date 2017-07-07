@@ -38,7 +38,7 @@ public class FilmController {
             .getLogger(FilmController.class);
 
     @Autowired
-    FilmRepository filmRepository;
+    private FilmRepository filmRepository;
 
     @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(method = RequestMethod.GET)

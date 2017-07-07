@@ -132,8 +132,5 @@ public class Language implements Serializable {
     public String toString() {
         return "us.xwhite.dvd.domain.Language[ languageId=" + languageId + " ]";
     }
-
-    public Language() {
-    }
     
 }

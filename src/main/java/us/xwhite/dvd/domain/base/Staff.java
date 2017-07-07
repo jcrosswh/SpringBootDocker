@@ -218,9 +218,6 @@ public class Staff implements Serializable {
         return "us.xwhite.dvd.domain.Staff[ staffId=" + staffId + " ]";
     }
 
-    public Staff() {
-    }
-
     public byte[] getPicture() {
         return picture;
     }
