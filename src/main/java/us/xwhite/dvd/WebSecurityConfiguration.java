@@ -81,7 +81,7 @@ class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    EvaluationContextExtension securityExtension() {
+    public EvaluationContextExtension securityExtension() {
         return new SecurityEvaluationContextExtension();
     }
 }
