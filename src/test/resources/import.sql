@@ -40,7 +40,7 @@ insert into FILM_CATEGORY (film_id, category_id, last_update) values (3, 1, sysd
 insert into FILM_CATEGORY (film_id, category_id, last_update) values (4, 1, sysdate);
 insert into FILM_CATEGORY (film_id, category_id, last_update) values (5, 1, sysdate);
 
-insert into CUSTOMER (customer_id, store_id, first_name, last_name, address_id, active, create_date) values (1 ,1, 'Joel', 'Crosswhite', 1, 1, sysdate);
+insert into CUSTOMER (customer_id, store_id, first_name, last_name, email, address_id, active, create_date) values (1 ,1, 'Joel', 'Crosswhite', 'joel.crosswhite@ix.netcom.com', 1, 1, sysdate);
 insert into CUSTOMER (customer_id, store_id, first_name, last_name, address_id, active, create_date) values (2, 2, 'Bob', 'Smith', 1, 1, sysdate);
 
 insert into RENTAL (rental_id, rental_date, inventory_id, customer_id, return_date, staff_id, last_update) values (1, sysdate, 1, 1, sysdate, 1, sysdate);
