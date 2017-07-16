@@ -31,7 +31,7 @@ import us.xwhite.dvd.domain.CustomerSummary;
  * @author Joel Crosswhite <joel.crosswhite@ix.netcom.com>
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 @ActiveProfiles("test")
 public class CustomerRepositoryTest {
 
