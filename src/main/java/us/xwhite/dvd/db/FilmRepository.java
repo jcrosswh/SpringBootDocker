@@ -19,13 +19,19 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
 import us.xwhite.dvd.domain.base.Film;
+import us.xwhite.dvd.domain.base.Inventory;
 
 /**
  *
  * @author Joel Crosswhite <joel.crosswhite@ix.netcom.com>
  */
 public interface FilmRepository extends Repository<Film, Short> {
- 
+
     @Query("select f from Film f where f.title = :title")
     public Film findOneByName(@Param("title") String title);
+
+    @Query("select min(i) "
+            + "from Inventory i join i.filmId f left join i.rentalCollection r with r.returnDate is null "
+            + "where i.storeId.storeId = :storeId and r.inventoryId is null and f.title = :filmTitle")
+    public Inventory findFilmByStoreAndNameForRental(@Param("storeId") Long storeId, @Param("filmTitle") String filmTitle);
 }

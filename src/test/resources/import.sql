@@ -29,6 +29,8 @@ insert into INVENTORY (inventory_id, film_id, store_id, last_update) values (3, 
 insert into INVENTORY (inventory_id, film_id, store_id, last_update) values (4, 4, 2, sysdate);
 insert into INVENTORY (inventory_id, film_id, store_id, last_update) values (5, 5, 2, sysdate);
 insert into INVENTORY (inventory_id, film_id, store_id, last_update) values (6, 3, 1, sysdate);
+insert into INVENTORY (inventory_id, film_id, store_id, last_update) values (7, 1, 1, sysdate);
+insert into INVENTORY (inventory_id, film_id, store_id, last_update) values (8, 2, 1, sysdate);
 
 insert into CATEGORY (category_id, name, last_update) values (1, 'Action', sysdate);
 insert into CATEGORY (category_id, name, last_update) values (2, 'Sci-fi', sysdate);

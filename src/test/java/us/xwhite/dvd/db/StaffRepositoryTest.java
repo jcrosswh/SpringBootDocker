@@ -21,10 +21,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
-import us.xwhite.dvd.domain.CustomerSummary;
+import us.xwhite.dvd.domain.base.Staff;
 
 /**
  *
@@ -33,26 +32,15 @@ import us.xwhite.dvd.domain.CustomerSummary;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 @ActiveProfiles("test")
-public class CustomerRepositoryTest {
+public class StaffRepositoryTest {
 
     @Autowired
-    private CustomerRepository customerRepository;
+    private StaffRepository staffRepository;
 
     @Test
     @Transactional
-    @WithMockUser(username = "joel.crosswhite@ix.netcom.com")
-    public void findOneByAuthenticatedUser() {
-        CustomerSummary customer = customerRepository.findOneSummaryByAuthenticatedUser();
-        Assert.assertNotNull(customer);
-        Assert.assertEquals("joel.crosswhite@ix.netcom.com", customer.getEmail());
-        Assert.assertEquals("Joel", customer.getFirstName());
-    }
-
-    @Test
-    @Transactional
-    @WithMockUser(username = "jcrosswhite")
-    public void findOneByAuthenticatedUser_noUser() {
-        CustomerSummary customer = customerRepository.findOneSummaryByAuthenticatedUser();
-        Assert.assertNull(customer);
+    public void findOneById() {
+        Staff staff = staffRepository.findOneById((short) 1);
+        Assert.assertNotNull(staff);
     }
 }

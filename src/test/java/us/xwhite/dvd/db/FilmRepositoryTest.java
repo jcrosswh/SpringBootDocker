@@ -24,6 +24,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import us.xwhite.dvd.domain.base.Film;
+import us.xwhite.dvd.domain.base.Inventory;
 
 /**
  *
@@ -42,7 +43,18 @@ public class FilmRepositoryTest {
     public void findAll() {
         String filmTitle = "ACADEMY DINOSAUR";
         Film film = filmRepository.findOneByName(filmTitle);
-        Assert.assertTrue(film != null);
+        Assert.assertNotNull(film);
         Assert.assertEquals(filmTitle, film.getTitle());
+    }
+    
+    @Test
+    @Transactional
+    public void findFilmIdToRent() {
+        Inventory inventory = filmRepository.findFilmByStoreAndNameForRental(1L, "ACADEMY DINOSAUR");
+        Assert.assertNotNull(inventory);
+        Assert.assertEquals(7, inventory.getInventoryId().intValue());
+        inventory = filmRepository.findFilmByStoreAndNameForRental(1L, "ACE GOLDFINGER");
+        Assert.assertNotNull(inventory);
+        Assert.assertEquals(8, inventory.getInventoryId().intValue());
     }
 }

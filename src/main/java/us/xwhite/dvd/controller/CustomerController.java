@@ -43,7 +43,7 @@ public class CustomerController {
     @RequestMapping(value = {"/current"}, method = RequestMethod.GET)
     public CustomerSummary getLoggedInDetails() {
         logger.debug("In getLoggedInDetails...");
-        return customerRepository.findOneByAuthenticatedUser();
+        return customerRepository.findOneSummaryByAuthenticatedUser();
     }
     
 }

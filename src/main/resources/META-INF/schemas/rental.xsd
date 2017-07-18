@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:sakila="http://xwhite.us/sakila/schemas"
+           elementFormDefault="qualified"
+           targetNamespace="http://xwhite.us/sakila/schemas">
+    <xs:element name="RentalRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Films" type="sakila:FilmsType" maxOccurs="1" minOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute name="storeId" type="xs:integer" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="FilmsType">
+        <xs:sequence>
+            <xs:element name="Film" type="sakila:FilmType" maxOccurs="unbounded" minOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="FilmType">
+        <xs:attribute type="xs:string" name="title" use="required"/>
+    </xs:complexType>
+</xs:schema>

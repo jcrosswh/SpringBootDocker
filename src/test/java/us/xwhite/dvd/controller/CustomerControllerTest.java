@@ -63,7 +63,7 @@ public class CustomerControllerTest {
         expectedResult.setFirstName("Joel");
         expectedResult.setLastName("Crosswhite");
 
-        given(customerRepository.findOneByAuthenticatedUser())
+        given(customerRepository.findOneSummaryByAuthenticatedUser())
                 .willReturn(expectedResult);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/customers/current").accept(MediaType.APPLICATION_JSON))
@@ -71,6 +71,6 @@ public class CustomerControllerTest {
                 .andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(header().string(HttpHeaders.ETAG, "\"03c6470a0f273931903a1538acdedffae\""));
 
-        verify(customerRepository, atLeast(1)).findOneByAuthenticatedUser();
+        verify(customerRepository, atLeast(1)).findOneSummaryByAuthenticatedUser();
     }
 }

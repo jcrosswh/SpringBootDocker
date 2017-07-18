@@ -42,9 +42,11 @@ public class InventorySummaryRepositoryTest {
     @Transactional
     public void findAllInStockAtStore() {
         List<InventorySummary> inventorySummary = inventorySummaryRepository.findAllInStockAtStore(1L);
-        Assert.assertEquals(1, inventorySummary.size());
-        Assert.assertEquals(2, inventorySummary.get(0).getCount().intValue());
-        Assert.assertEquals("ADAPTATION HOLES", inventorySummary.get(0).getFilmTitle());
-        Assert.assertEquals("Action", inventorySummary.get(0).getCategory());
+        Assert.assertEquals(3, inventorySummary.size());
+        Assert.assertEquals(1, inventorySummary.get(1).getCount().intValue());
+        Assert.assertEquals(2, inventorySummary.get(2).getCount().intValue());
+        Assert.assertEquals("ACE GOLDFINGER", inventorySummary.get(1).getFilmTitle());
+        Assert.assertEquals("ADAPTATION HOLES", inventorySummary.get(2).getFilmTitle());
+        Assert.assertEquals("Action", inventorySummary.get(2).getCategory());
     }
 }

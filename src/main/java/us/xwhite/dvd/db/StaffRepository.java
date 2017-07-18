@@ -17,18 +17,16 @@ package us.xwhite.dvd.db;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
-import us.xwhite.dvd.domain.CustomerSummary;
-import us.xwhite.dvd.domain.base.Customer;
+import org.springframework.data.repository.query.Param;
+import us.xwhite.dvd.domain.base.Staff;
 
 /**
  *
  * @author Joel Crosswhite <joel.crosswhite@ix.netcom.com>
  */
-public interface CustomerRepository extends Repository<Customer, Short> {
+public interface StaffRepository extends Repository<Staff, Short> {
 
-    @Query("select new CustomerSummary(c.email, c.firstName, c.lastName) from Customer c where c.email = ?#{principal.username}")
-    public CustomerSummary findOneSummaryByAuthenticatedUser();
-    
-    @Query("select c from Customer c where c.email = ?#{principal.username}")
-    public Customer findOneByAuthenticatedUser();
+    @Query("select s from Staff s where s.staffId = :staffId")
+    public Staff findOneById(@Param("staffId") Short staffId);
+
 }
