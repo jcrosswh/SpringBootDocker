@@ -45,7 +45,6 @@ public class RentalService {
     private StoreRepository storeRepository;
     private FilmRepository filmRepository;
     private CustomerRepository customerRepository;
-    private StaffRepository staffRepository;
     private RentalRepository rentalRepository;
 
     private final Staff STAFF;
@@ -56,7 +55,6 @@ public class RentalService {
         this.storeRepository = storeRepository;
         this.filmRepository = filmRepository;
         this.customerRepository = customerRepository;
-        this.staffRepository = staffRepository;
         this.rentalRepository = rentalRepository;
         
         // would probably want to create a "service" staff acount
