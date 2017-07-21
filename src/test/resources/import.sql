@@ -2,7 +2,7 @@ insert into COUNTRY (country_id, country, last_update) values (1, 'United States
 
 insert into CITY (city_id, city, country_id, last_update) values (1, 'Denver', 1, sysdate);
 
-insert into ADDRESS (address_id, address, district, city_id, phone, location, last_update) values (1, '123 Main St', 'Colorado', 1, '8885551212', RAWTOHEX('Location'), sysdate);
+insert into ADDRESS (address_id, address, district, city_id, phone, last_update) values (1, '123 Main St', 'Colorado', 1, '8885551212', sysdate);
 
 -- For circular reference
 SET REFERENTIAL_INTEGRITY FALSE;

@@ -26,7 +26,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -43,12 +42,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "address")
 public class Address implements Serializable {
-
-    @Basic(optional = false)
-    @NotNull
-    @Lob
-    @Column(name = "location")
-    private byte[] location;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "addressId")
     private Collection<Customer> customerCollection;
@@ -204,14 +197,6 @@ public class Address implements Serializable {
     @Override
     public String toString() {
         return "us.xwhite.dvd.domain.Address[ addressId=" + addressId + " ]";
-    }
-
-    public byte[] getLocation() {
-        return location;
-    }
-
-    public void setLocation(byte[] location) {
-        this.location = location;
     }
 
     public Collection<Customer> getCustomerCollection() {
