@@ -39,37 +39,37 @@ import javax.validation.constraints.NotNull;
 public class Rental implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "rental_id")
     private Integer rentalId;
-    
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "rental_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date rentalDate;
-    
+
     @Column(name = "return_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date returnDate;
-    
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "last_update")
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUpdate;
-    
+
     @JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
     @ManyToOne(optional = false)
     private Customer customerId;
-    
+
     @JoinColumn(name = "inventory_id", referencedColumnName = "inventory_id")
     @ManyToOne(optional = false)
     private Inventory inventoryId;
-    
+
     @JoinColumn(name = "staff_id", referencedColumnName = "staff_id")
     @ManyToOne(optional = false)
     private Staff staffId;
@@ -150,5 +150,18 @@ public class Rental implements Serializable {
     public String toString() {
         return "us.xwhite.dvd.domain.Rental[ rentalId=" + rentalId + " ]";
     }
-    
+
+    public Rental() {
+    }
+
+    public Rental(Integer rentalId, Date rentalDate, Date returnDate, Date lastUpdate, Customer customerId, Inventory inventoryId, Staff staffId) {
+        this.rentalId = rentalId;
+        this.rentalDate = rentalDate;
+        this.returnDate = returnDate;
+        this.lastUpdate = lastUpdate;
+        this.customerId = customerId;
+        this.inventoryId = inventoryId;
+        this.staffId = staffId;
+    }
+
 }

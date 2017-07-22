@@ -16,8 +16,10 @@
 package us.xwhite.dvd;
 
 import javax.servlet.Filter;
+import org.ebaysf.web.cors.CORSFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.filter.ShallowEtagHeaderFilter;
 
@@ -31,5 +33,20 @@ public class DvdApplication {
     @Bean
     public Filter compressFilter() {
         return new ShallowEtagHeaderFilter();
+    }
+
+    private Filter corsFilter() {
+        return new CORSFilter();
+    }
+
+    @Bean
+    public FilterRegistrationBean corsFilterRegistration() {
+
+        FilterRegistrationBean registration = new FilterRegistrationBean();
+        registration.setFilter(corsFilter());
+        registration.addInitParameter("cors.allowed.origins", "http://localhost:4200");
+        registration.addInitParameter("cors.allowed.headers", "Origin,Accept,X-Requested-With,Content-Type,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization");
+        registration.setOrder(1);
+        return registration;
     }
 }

@@ -15,13 +15,45 @@
  */
 package us.xwhite.dvd.db;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
 import us.xwhite.dvd.domain.base.Rental;
 
 /**
  *
  * @author Joel Crosswhite <joel.crosswhite@ix.netcom.com>
  */
-public interface RentalRepository extends JpaRepository<Rental, Integer> {
-    
+@Repository
+public class RentalRepository {
+
+    private static final String INSERT_RENTAL = "insert into rental "
+            + "(rental_date, inventory_id, customer_id, staff_id, last_update) "
+            + "values (:rental_date, :inventory_id, :customer_id, :staff_id, :last_update)";
+
+    @Autowired
+    private NamedParameterJdbcTemplate jdbcTemplate;
+
+    public Rental save(Rental rental) {
+        int rentalId = insertRentalAndReturnId(rental);
+        return new Rental(rentalId, rental.getRentalDate(), rental.getReturnDate(), rental.getLastUpdate(), rental.getCustomerId(), rental.getInventoryId(), rental.getStaffId());
+    }
+
+    private int insertRentalAndReturnId(Rental rental) {
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("rental_date", new Date());
+        paramMap.put("inventory_id", rental.getInventoryId().getInventoryId());
+        paramMap.put("customer_id", rental.getCustomerId().getCustomerId());
+        paramMap.put("staff_id", rental.getStaffId().getStaffId());
+        paramMap.put("last_update", new Date());
+        jdbcTemplate.update(INSERT_RENTAL, new MapSqlParameterSource(paramMap), keyHolder);
+        return keyHolder.getKey().intValue();
+    }
 }
