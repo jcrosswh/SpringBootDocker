@@ -16,5 +16,6 @@ FROM openjdk:8u131-jre-alpine
 LABEL maintainer="Joel Crosswhite <joel.crosswhite@ix.netcom.com>"
 # FROM store/oracle/serverjre:8
 COPY app.jar app.jar
+VOLUME /tomcat
 EXPOSE 8080
 ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
