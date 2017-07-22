@@ -39,13 +39,13 @@ import us.xwhite.dvd.domain.base.Staff;
 @Service
 public class RentalService {
     
-    private static final Logger logger = LoggerFactory
+    private static final Logger LOGGER = LoggerFactory
             .getLogger(RentalService.class);
 
-    private StoreRepository storeRepository;
-    private FilmRepository filmRepository;
-    private CustomerRepository customerRepository;
-    private RentalRepository rentalRepository;
+    private final StoreRepository storeRepository;
+    private final FilmRepository filmRepository;
+    private final CustomerRepository customerRepository;
+    private final RentalRepository rentalRepository;
 
     private final Staff STAFF;
 
@@ -72,7 +72,7 @@ public class RentalService {
                 for (String filmTitle : filmTitles) {
 
                     Inventory inventory = filmRepository.findFilmByStoreAndNameForRental(storeId, filmTitle);
-                    logger.debug("inventory:={}", inventory);
+                    LOGGER.debug("inventory:={}", inventory);
 
                     if (inventory != null) {
 
@@ -85,8 +85,6 @@ public class RentalService {
                         rentalRepository.save(rental);
                     }
                 }
-                
-                rentalRepository.flush();
             }
         }
     }
