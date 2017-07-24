@@ -217,6 +217,8 @@
                         <argument>-d</argument>
                         <!-- <argument>-e</argument>
                         <argument>VIRTUAL_HOST=docker.lm7379.arrow.com</argument> -->
+                        <argument>-v</argument>
+                        <argument>/c/Users/Joel/tomcat:/tomcat</argument>
                         <argument>--env-file</argument>
                         <argument>env.file</argument>
                         <argument>jcrosswh/spring-boot-docker:${project.version}</argument>
