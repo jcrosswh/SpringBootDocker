@@ -213,7 +213,7 @@
                     <arguments>
                         <argument>run</argument>
                         <argument>-p</argument>
-                        <argument>8080:8080</argument>
+                        <argument>8443:8443</argument>
                         <argument>-d</argument>
                         <argument>-v</argument>
                         <argument>/c/Users/Joel/tomcat:/tomcat</argument>
