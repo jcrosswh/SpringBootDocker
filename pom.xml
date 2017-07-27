@@ -215,8 +215,6 @@
                         <argument>-p</argument>
                         <argument>8080:8080</argument>
                         <argument>-d</argument>
-                        <!-- <argument>-e</argument>
-                        <argument>VIRTUAL_HOST=docker.lm7379.arrow.com</argument> -->
                         <argument>-v</argument>
                         <argument>/c/Users/Joel/tomcat:/tomcat</argument>
                         <argument>--env-file</argument>
