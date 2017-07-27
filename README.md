@@ -6,6 +6,10 @@ A sample project demonstrating a Spring Boot application in a Docker container.
 
 For getting started with development and testing.
 
+### SSL Support
+
+Getting SSL working on your machine can be tricky, so that is not a core part of the application (yet).  If you'd like to see how to run this project with SSL enabled please see the SSL branch.
+
 ### Prerequisites
 
 To bulid this project you'll need Java 8 JDK and Maven.
