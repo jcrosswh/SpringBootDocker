@@ -24,7 +24,7 @@ To run the application locally:
 
 Clone the project
 ```
-git clone git@github.com:jcrosswh/SpringBootDocker.git
+git clone https://github.com/jcrosswh/SpringBootDocker.git
 ```
 Build the JAR
 ```
